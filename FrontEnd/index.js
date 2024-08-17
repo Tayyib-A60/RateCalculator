@@ -17,7 +17,6 @@ async function init() {
     const gbpInputs = document.getElementsByClassName('from-currency');
     const ngnInputs = document.getElementsByClassName('to-currency');
 
-    // if(inputs.length > 0) {
     if(gbpInputs.length && ngnInputs.length) {
         const gbpInput = gbpInputs[0];
         const ngnInput = ngnInputs[0];
