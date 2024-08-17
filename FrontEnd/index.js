@@ -23,15 +23,26 @@ async function init() {
         const ngnInput = ngnInputs[0];
 
         gbpInput.addEventListener('input', (event) => {
-            const ngnCalculatedValue = event.target.valueAsNumber * rate;
+            const ngnCalculatedValue = Number(event.target.value) * rate;
             ngnInput.value = ngnCalculatedValue.toFixed(2);
         });
 
         ngnInput.addEventListener('input', (event) => {
-            const gbpCalculatedValue = event.target.valueAsNumber / rate;
+            const gbpCalculatedValue = Number(event.target.value) / rate;
             gbpInput.value = gbpCalculatedValue.toFixed(2);
         });
     }
+}
+
+function numberFormatter(value, currency) {
+    const formattedValue = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency
+    }).format(value);
+
+    console.log(formattedValue);
+
+    return formattedValue;
 }
 
 setTimeout(async () => {
