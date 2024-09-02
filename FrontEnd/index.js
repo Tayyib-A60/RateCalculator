@@ -1,5 +1,6 @@
 let rate = 0;
-const baseUrl = 'https://localhost:7298';
+// const baseUrl = 'https://localhost:7298';
+const baseUrl = 'https://rate-calculator-1-0.onrender.com';
 
 async function init() {
     const getRateAPIResponse = await fetch(`${baseUrl}/api/Rate/get-rate`);
