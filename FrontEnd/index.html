@@ -16,8 +16,27 @@
             <input type="number" placeholder="Enter GBP value" class="from-currency p-1">
             <p id="exchange-rate"></p>
             <input type="number" placeholder="Enter NGN value" class="to-currency m-top-2 p-1">
+            <button class="send-now m-top-2" onclick="sendNow()">Send Now</button>
         </div>
 
+        <div class="flex-column w-200 h-200 m-auto disp-none">
+            <select type="number"  class="select-bank p-1">
+                <option class="bank-option" value="">Select Bank</option>
+                <option class="bank-option" value="GTB">GT Bank</option>
+                <option class="bank-option" value="Access">Access Bank</option>
+                <option class="bank-option" value="Union">Union Bank</option>
+                <option class="bank-option" value="Stanbic">Stanbic IBTC Bank</option>
+            </select>
+
+            <input type="number" placeholder="Enter account number" min="0" class="account-number p-1 m-top-2">
+            <button class="send m-top-2" disabled onclick="send()">Send</button>
+        </div>
+
+        <div class="flex-column w-200 h-200 m-auto disp-none">
+            <p class="success">Transaction successful!</p>
+
+            <button class="home m-top-2" onclick="home()">Return to home</button>
+        </div>
     </div>
 </body>
 </html>
