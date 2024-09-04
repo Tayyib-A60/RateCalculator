@@ -124,6 +124,18 @@ p {
     background-color: rgb(81, 51, 110);
 }
 
+.send-disabled {
+    cursor: not-allowed !important;
+}
+
+.send-disabled:hover {
+    background-color: rgb(215, 201, 228);
+}
+
+.send-disabled:active {
+    background-color: rgb(215, 201, 228);
+}
+
 .home {
     padding: 16px;
     width: 234px;

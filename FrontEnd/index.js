@@ -1,8 +1,9 @@
 let rate = 0;
-// const baseUrl = 'https://localhost:7298';
 const baseUrl = 'https://rate-calculator-1-0.onrender.com';
 
 let sendEnabled = false;
+let selectedBank = "";
+let accountNumber = "";
 
 async function init() {
     const getRateAPIResponse = await fetch(`${baseUrl}/api/Rate/get-rate`);
@@ -24,21 +25,43 @@ async function init() {
 
     const sendButtons = document.getElementsByClassName('send');
 
+    if(sendButtons.length) {
+        const sendButton = sendButtons[0];
+        sendButton.classList.add('send-disabled');
+    }
+
+    const selectBanks = document.getElementsByClassName('select-bank');
+
+    if(selectBanks.length) {
+        const selectBank = selectBanks[0];
+
+        selectBank.addEventListener('change', (event) => {
+            selectedBank = event.target.value;
+
+            if(accountNumber.length === 10 && selectedBank) {
+                if(sendButtons.length) {
+                    const sendButton = sendButtons[0];
+                    sendButton.classList.remove('send-disabled');
+                }
+            }
+        });
+    }
+
     if(accountNumberInputs.length) {
         const accountNumberInput = accountNumberInputs[0];
 
         accountNumberInput.addEventListener('input', (event) => {
-            const accountNumber = event.target.value;
+            accountNumber = event.target.value;
 
-            if(accountNumber.length === 10) {
+            if(accountNumber.length === 10 && selectedBank) {
                 if(sendButtons.length) {
                     const sendButton = sendButtons[0];
-                    sendButton.disabled = false;
+                    sendButton.classList.remove('send-disabled');
                 }
             } else {
                 if(sendButtons.length) {
                     const sendButton = sendButtons[0];
-                    sendButton.disabled = true;
+                    sendButton.classList.add('send-disabled');
                 }
             }
         });
@@ -73,6 +96,20 @@ function sendNow() {
     }
 }
 
+function trySend() {
+    const sendButtons = document.getElementsByClassName('send');
+
+    if(sendButtons.length) {
+        const sendButton = sendButtons[0];
+
+        if(sendButton.classList.contains('send-disabled')) {
+            window.alert("Please select a bank and enter a valid 10 digit account number to continue.");
+        } else {
+            send();
+        }
+    }
+}
+
 function send() {
     const sections = document.getElementsByClassName('flex-column');
 
@@ -92,11 +129,20 @@ function send() {
         accountNumberInput.value = "";
     }
 
+    const selectBanks = document.getElementsByClassName('select-bank');
+
+    if(selectBanks.length) {
+        const selectBank = selectBanks[0];
+        selectBank.value = "";
+        selectedBank = "";
+        accountNumber = "";
+    }
+
     const sendButtons = document.getElementsByClassName('send');
 
     if(sendButtons.length) {
         const sendButton = sendButtons[0];
-        sendButton.disabled = true;
+        sendButton.classList.add('send-disabled');
     }
 }
 
